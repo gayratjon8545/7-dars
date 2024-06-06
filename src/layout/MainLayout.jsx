@@ -14,7 +14,9 @@ const MainLayout = () => {
       <main className="site-container">
         <Outlet />
       </main>
-      {/* <Footer /> */}
+      <div className="site-container">
+        <Footer />
+      </div>
     </>
   );
 };

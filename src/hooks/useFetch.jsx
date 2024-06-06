@@ -31,7 +31,7 @@
 import { useState, useEffect } from "react";
 
 function useFetch(url) {
-  const [todos, setTodos] = useState(null);
+  const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState();
   useEffect(() => {
@@ -43,7 +43,7 @@ function useFetch(url) {
           throw new Error("Something went wrong :(");
         }
         const response = await request.json();
-        setTodos(response);
+        setData(response);
         setIsPending(false);
         setError(null);
       } catch (error) {
@@ -55,7 +55,7 @@ function useFetch(url) {
     getData();
   }, [url]);
 
-  return { todos, isPending, error };
+  return { data, isPending, error };
 }
 
 export { useFetch };

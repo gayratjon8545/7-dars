@@ -1,9 +1,9 @@
 import ProductCard from "./ProductCard";
 
-function ProductList({ todos }) {
+function ProductList({ data }) {
   return (
     <div>
-      {todos.products.map((product) => {
+      {data.products.map((product) => {
         return <ProductCard key={product.id} product={product} />;
       })}
     </div>
