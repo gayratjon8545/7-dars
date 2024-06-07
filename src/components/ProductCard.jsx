@@ -12,10 +12,10 @@ function ProductCard({ product }) {
     price,
   } = product;
   return (
-    <Link className="grid grid-cols-3 gap-5" to={`/product/${id}`}>
-      <div className="">
+    <Link className="block w-full" to={`/product/${id}`}>
+      <div className="block w-full">
         <br />
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl">
           <div className="card-body ">
             <h2 className="card-title">{title}</h2>
 
