@@ -9,6 +9,10 @@ const changeState = (state, action) => {
       return { ...state, user: payload };
     case "LOG_OUT":
       return { ...state, user: null };
+    case "AUTH_CHANGE": {
+      return { ...state, isAuthChange: true };
+    }
+
     default:
       return state;
   }
@@ -19,9 +23,10 @@ function GlobalContextProvider({ children }) {
     user: null,
     product: [],
     total: 0,
+    isAuthChange: false,
   });
   return (
-    <GlobalContext.Provider value={{ ...state }}>
+    <GlobalContext.Provider value={{ ...state, dispatch }}>
       {children}
     </GlobalContext.Provider>
   );

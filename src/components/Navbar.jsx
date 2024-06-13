@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 
 // react-icons
-
 import { FaCartShopping } from "react-icons/fa6";
+
+// sing out
+import { auth } from "../firebase/firebaseConfig";
+import { signOut } from "firebase/auth";
 
 //components
 import NavLinks from "./NavLinks";
@@ -17,6 +20,12 @@ function Navbar() {
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
     setTheme(newTheme);
+  };
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -68,6 +77,15 @@ function Navbar() {
                 <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
               </svg>
             </label>
+            <div className="avatar flex items-center gap-4">
+              <p className="text-lg">G'ayrat Kudoyberdiyev</p>
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src={UserActivation.photoURL} />
+              </div>
+            </div>
+            <div onClick={logout} className="btn btn-primary w-18 h-6">
+              Log out
+            </div>
           </div>
         </div>
       </div>
