@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
+
+// react-icons
+
+import { FaCartShopping } from "react-icons/fa6";
+
 //components
 import NavLinks from "./NavLinks";
 import { useEffect, useState } from "react";
 
+import { useGlobalContext } from "../hooks/useGlobalContext";
+
 function Navbar() {
+  const { total } = useGlobalContext();
+
   const [theme, setTheme] = useState("winter");
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -27,7 +36,16 @@ function Navbar() {
               <NavLinks />
             </ul>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end flex gap-10 items-center">
+            <div className="indicator ">
+              <span className="indicator-item badge badge-md badge-secondary">
+                {total}
+              </span>
+
+              <Link to="/shopping">
+                <FaCartShopping className="w-7 h-7" />
+              </Link>
+            </div>
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input onClick={handleTheme} type="checkbox" />

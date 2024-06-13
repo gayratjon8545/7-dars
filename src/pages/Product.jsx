@@ -25,6 +25,12 @@ function Product() {
             <figure>
               <img src={data.thumbnail} alt="Shoes" />
             </figure>
+            <div className="flex mt-5 mb-5 w-32 gap-5 items-center site-container">
+              <button className="btn w-14 h-14 btn-secondary">+</button>
+              <p>{0}</p>
+              <button className="btn w-14 h-14 btn-secondary">-</button>
+            </div>
+            <button className="btn btn-primary items-center">Add shop</button>
           </div>
         </div>
       )}
