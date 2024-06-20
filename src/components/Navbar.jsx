@@ -11,12 +11,17 @@ import { signOut } from "firebase/auth";
 import NavLinks from "./NavLinks";
 import { useEffect, useState } from "react";
 
+function themeFromLocalStorage() {
+  return localStorage.getItem("theme") || "winter";
+}
+
 import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function Navbar() {
-  const { total } = useGlobalContext();
+  const { total, user } = useGlobalContext();
+  console.log(user);
 
-  const [theme, setTheme] = useState("winter");
+  const [theme, setTheme] = useState(themeFromLocalStorage());
   const handleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
     setTheme(newTheme);
@@ -30,6 +35,7 @@ function Navbar() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   });
   return (
     <>
@@ -78,11 +84,12 @@ function Navbar() {
               </svg>
             </label>
             <div className="avatar flex items-center gap-4">
-              <p className="text-lg">G'ayrat Kudoyberdiyev</p>
+              <p className="text-lg">{user.displayName}</p>
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src={UserActivation.photoURL} />
+                <img src={user.photoURL} />
               </div>
             </div>
+
             <div onClick={logout} className="btn btn-primary w-18 h-6">
               Log out
             </div>

@@ -1,7 +1,17 @@
+import { GlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
+import CartItem from "../components/CartItem";
+
 function Shopping() {
+  const { total, products, deleteProduct } = useGlobalContext();
   return (
-    <div className="text-xl mb-80 mt-5 items-center site-container">
-      Hozircha hech qanday mahsulot yoq :({" "}
+    <div className="site-container">
+      <ul>
+        {products.length > 0 &&
+          products.map((product) => {
+            return <CartItem key={product.id} product={product} />;
+          })}
+      </ul>
     </div>
   );
 }

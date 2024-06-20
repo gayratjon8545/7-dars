@@ -1,12 +1,20 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 
 function Product() {
+  const { addProduct } = useContext(GlobalContext);
   const { id } = useParams();
   const { data, isPending, error } = useFetch(
     "https://dummyjson.com/products/" + id
   );
 
+  const [amount, setAmout] = useState(0);
+
+  const handleAdd = () => {
+    addProduct({ ...data, amount });
+  };
   return (
     <>
       {data && (
@@ -26,11 +34,26 @@ function Product() {
               <img src={data.thumbnail} alt="Shoes" />
             </figure>
             <div className="flex mt-5 mb-5 w-32 gap-5 items-center site-container">
-              <button className="btn w-14 h-14 btn-secondary">+</button>
-              <p>{0}</p>
-              <button className="btn w-14 h-14 btn-secondary">-</button>
+              <button
+                onClick={() => setAmout(amount + 1)}
+                className="btn w-14 h-14 btn-secondary"
+              >
+                +
+              </button>
+              <p>{amount}</p>
+              <button
+                onClick={() => setAmout(amount - 1)}
+                className="btn w-14 h-14 btn-secondary"
+              >
+                -
+              </button>
             </div>
-            <button className="btn btn-primary items-center">Add shop</button>
+            <button
+              onClick={handleAdd}
+              className="btn btn-primary items-center"
+            >
+              Add shop
+            </button>
           </div>
         </div>
       )}

@@ -27,9 +27,11 @@ import Shopping from "./pages/Shopping";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 
+import { action as RegisterAction } from "./pages/Register";
+
 function App() {
   const { user, dispatch, isAuthChange } = useContext(GlobalContext);
-  console.log(user);
+  // console.log(user);
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -69,6 +71,7 @@ function App() {
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
+      action: RegisterAction,
     },
   ]);
 
